@@ -1,0 +1,377 @@
+/* Base styles and CSS variables */
+:root {
+    --background: #f8f9fa;
+    --foreground: #262626;
+    --card: #ffffff;
+    --card-foreground: #262626;
+    --primary: #F31E1E;
+    --primary-foreground: #ffffff;
+    --secondary: #141414;
+    --secondary-foreground: #ffffff;
+    --muted: #f3f4f6;
+    --muted-foreground: #232222;
+    --accent: #f3f4f6;
+    --accent-foreground: #141414;
+    --border: #e5e7eb;
+    --input: #e5e7eb;
+    --ring: #dc2626;
+    --radius: 0.5rem;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.dark {
+    --background: #222222;
+    --foreground: #f8f9fa;
+    --card: #181818;
+    --card-foreground: #f8f9fa;
+    --primary: #F31E1E;
+    --primary-foreground: #ffffff;
+    --secondary: #3e3e3e;
+    --secondary-foreground: #ffffff;
+    --muted: #3e3e3e;
+    --muted-foreground: #d4d4d4;
+    --accent: #3e3e3e;
+    --accent-foreground: #ffffff;
+    --border: #3e3e3e;
+    --input: #353535;
+    --ring: #F31E1E;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted-foreground);
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    flex: 1;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--muted-foreground);
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--foreground);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-toggle:hover {
+    background-color: var(--accent);
+}
+
+.theme-toggle .fa-sun {
+    display: none;
+}
+
+.dark .theme-toggle .fa-moon {
+    display: none;
+}
+
+.dark .theme-toggle .fa-sun {
+    display: inline-block;
+}
+
+/* Main content styles */
+.converter-card {
+    background-color: var(--card);
+    color: var(--card-foreground);
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    flex: 1;
+    border: 1px solid var(--input)
+}
+
+.converter-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.textarea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+label {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--foreground);
+    text-align: center;
+}
+
+.textarea-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 0.75rem;
+    border: 1px solid var(--input);
+    border-radius: var(--radius);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 1rem;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--ring);
+    box-shadow: 0 0 0 2px rgba(220, 38, 38, 0.2);
+}
+
+.unicode-textarea {
+    font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+.bijoy-textarea {
+    font-family: 'SutonnyMJ', sans-serif;
+}
+
+/* Copy button styles */
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--accent-foreground);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s, background-color 0.2s;
+    z-index: 10;
+}
+
+.textarea-wrapper:hover .copy-btn {
+    opacity: 1;
+}
+
+.copy-btn:hover {
+    background-color: var(--p);
+}
+
+.copy-btn.copied {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+/* Button styles */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.bijoy-btn {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+}
+
+.bijoy-btn:hover {
+    background-color: #b91c1c;
+}
+
+.unicode-btn {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+}
+
+.unicode-btn:hover {
+    background-color: #101010;
+}
+
+.reset-btn {
+    background-color: var(--muted);
+    color: var(--foreground);
+}
+
+.reset-btn:hover {
+    background-color: var(--accent);
+}
+
+/* Mobile tabs */
+.mobile-tabs {
+    display: none;
+    margin-bottom: 1.5rem;
+}
+
+.tab-buttons {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.tab-button.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Toast notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 1000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--muted-foreground);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--foreground);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .converter-layout {
+        display: none;
+    }
+
+    .mobile-tabs {
+        display: block;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
