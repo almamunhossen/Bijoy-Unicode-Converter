@@ -46,7 +46,12 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     text-decoration: none;
 }
-
+ a, p{
+    color: var(--foreground);
+}
+ a:hover{
+    color: var(--primary);
+}
 body {
     background-color: var(--background);
     color: var(--foreground);
@@ -208,7 +213,7 @@ textarea:focus {
 }
 
 .copy-btn:hover {
-    background-color: var(--p);
+    background-color: var(--primary);
 }
 
 .copy-btn.copied {
