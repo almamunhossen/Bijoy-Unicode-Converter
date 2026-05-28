@@ -3,9 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="bd-logo.png" type="image/png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bangla Converter | বাংলা কনভার্টার</title>
-    <meta name="description" content="Convert between Bijoy and Unicode Bangla text formats">
+    <title>Bijoy / ANSI ⇄ Unicode Converter</title>
+    <meta name="description" content="Professional Bengali Bijoy and Unicode converter for legacy ANSI text">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap"
         rel="stylesheet">
@@ -14,41 +15,88 @@
 
 <body>
     <div class="container">
-        <!-- Header with theme toggle -->
-        <header>
+        <header class="app-header">
             <div class="header-content">
-                <h1>Bijoy - Unicode Converter | বিজয় - ইউনিকোড কনভার্টার</h1>
-                <h3>ANSI to Unicode Text Converter 💫
-                    <a href="http://www.almamunhossen.com">HOME</a></h3>
+                <div class="header-badge">Professional Bengali Converter</div>
+                <h1>Bijoy / ANSI ↔ Unicode</h1>
+                <p class="header-subtitle">Convert legacy Bijoy text into modern Unicode and back with a polished, fast
+                    workflow.</p>
+                <div class="header-links">
+                    <a href="http://www.almamunhossen.com" class="header-link">Visit homepage</a>
+                </div>
             </div>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-                <i class="fas fa-moon"></i>
-                <i class="fas fa-sun"></i>
-            </button>
-        
+            <div class="header-controls" style="display: flex; align-items: center; gap: 15px;">
+                <select id="keyboard-layout" class="layout-select"
+                    onchange="if(window.setKeyboardLayout) window.setKeyboardLayout(this.value);"
+                    aria-label="Select Keyboard Layout"
+                    style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--foreground); font-family: inherit; font-size: 14px; cursor: pointer;">
+                    <option value="1">English</option>
+                    <option value="5">Unijoy</option>
+                    <option value="4">Avro Phonetic</option>
+                    <option value="2" selected>Bijoy</option>
+                    <option value="3">Somewherein Phonetic</option>
+
+
+                </select>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
         </header>
 
-        <!-- Main content -->
         <main class="converter-card">
+            <div class="converter-summary" aria-label="Converter features">
+                <div class="summary-chip"><span class="summary-icon">✨</span><span>Instant preview</span></div>
+                <div class="summary-chip"><span class="summary-icon">📋</span><span>One-click copy</span></div>
+                <div class="summary-chip"><span class="summary-icon">🌙</span><span>Theme aware</span></div>
+            </div>
+
+            <div class="converter-status" aria-live="polite">
+                <div class="status-meta">
+                    <span class="status-pill">Ready</span>
+                    <span class="status-direction" id="conversion-direction">Waiting for input</span>
+                </div>
+                <p id="converter-status-text">Paste or type Bengali text into either editor to begin conversion.</p>
+            </div>
+
             <div class="converter-layout">
-                <!-- Unicode textarea -->
                 <div class="textarea-container">
-                    <label for="EDT">Unicode Text</label>
+                    <div class="editor-header">
+                        <div class="editor-title-block">
+                            <label for="EDT">Unicode Text</label>
+                            <span class="editor-subtitle">Modern Bengali Unicode</span>
+                        </div>
+                        <div class="editor-meta" id="unicode-stats">
+                            <span class="editor-count">0 chars</span>
+                            <span class="editor-state">Empty</span>
+                        </div>
+                    </div>
                     <div class="textarea-wrapper">
-                        <textarea id="EDT" name="textarea" placeholder="ইউনিকোড কি-বোর্ডের লেখা এখানে পেস্ট করুন"
-                            class="unicode-textarea" autofocus></textarea>
+                        <textarea id="EDT" name="textarea"
+                            placeholder="Unicode text here — paste Bengali text in Unicode format"
+                            class="unicode-textarea bengali-editor" autofocus></textarea>
                         <button class="copy-btn" data-target="EDT" aria-label="Copy Unicode text">
                             <i class="fas fa-copy"></i>
                         </button>
                     </div>
                 </div>
 
-                <!-- Bijoy textarea -->
                 <div class="textarea-container">
-                    <label for="CONVERTEDT">Bijoy Text</label>
+                    <div class="editor-header">
+                        <div class="editor-title-block">
+                            <label for="CONVERTEDT">Bijoy / ANSI Text</label>
+                            <span class="editor-subtitle">Legacy ANSI / Bijoy format</span>
+                        </div>
+                        <div class="editor-meta" id="bijoy-stats">
+                            <span class="editor-count">0 chars</span>
+                            <span class="editor-state">Empty</span>
+                        </div>
+                    </div>
                     <div class="textarea-wrapper">
-                        <textarea id="CONVERTEDT" placeholder="বিজয় কি-বোর্ডের লেখা এখানে পেস্ট করুন"
-                            class="bijoy-textarea"></textarea>
+                        <textarea id="CONVERTEDT"
+                            placeholder="Bijoy / ANSI text here — paste legacy Bengali keyboard text"
+                            class="bijoy-textarea bengali-editor"></textarea>
                         <button class="copy-btn" data-target="CONVERTEDT" aria-label="Copy Bijoy text">
                             <i class="fas fa-copy"></i>
                         </button>
@@ -56,7 +104,6 @@
                 </div>
             </div>
 
-            <!-- Mobile tabs -->
             <div class="mobile-tabs">
                 <div class="tab-buttons">
                     <button class="tab-button active" data-tab="unicode">Unicode</button>
@@ -66,7 +113,7 @@
                     <div class="tab-pane active" id="unicode-tab">
                         <div class="textarea-wrapper">
                             <textarea id="EDT-mobile" placeholder="ইউনিকোড কি-বোর্ডের লেখা এখানে পেস্ট করুন"
-                                class="unicode-textarea"></textarea>
+                                class="unicode-textarea bengali-editor"></textarea>
                             <button class="copy-btn" data-target="EDT-mobile" aria-label="Copy Unicode text">
                                 <i class="fas fa-copy"></i>
                             </button>
@@ -75,7 +122,7 @@
                     <div class="tab-pane" id="bijoy-tab">
                         <div class="textarea-wrapper">
                             <textarea id="CONVERTEDT-mobile" placeholder="বিজয় কি-বোর্ডের লেখা এখানে পেস্ট করুন"
-                                class="bijoy-textarea"></textarea>
+                                class="bijoy-textarea bengali-editor"></textarea>
                             <button class="copy-btn" data-target="CONVERTEDT-mobile" aria-label="Copy Bijoy text">
                                 <i class="fas fa-copy"></i>
                             </button>
@@ -84,32 +131,28 @@
                 </div>
             </div>
 
-            <!-- Conversion buttons -->
             <div class="button-group">
-                <button onclick="convertToTextArea('CONVERTEDT');" class="btn bijoy-btn">
-                    <i class="fas fa-exchange-alt"></i> ইউনিকোড থেকে বিজয়
-                </button>
-                <button onclick="convertFromTextArea('CONVERTEDT');" class="btn unicode-btn">
-                    <i class="fas fa-exchange-alt"></i> বিজয় থেকে ইউনিকোড
-                </button>
-                <button onclick="clearInput()" class="btn reset-btn">
-                    <i class="fas fa-sync-alt"></i> মুছে ফেলুন
+                <button type="button" onclick="clearInput()" class="btn reset-btn">
+                    <i class="fas fa-rotate-right"></i> Clear all
                 </button>
             </div>
         </main>
 
         <footer>
-            <p> </p>
-            <script>
-                date(new Date().getFullYear());
-                function date(year) {
-                    document.querySelector('footer p').innerHTML = `© ${year}<a href="http://almamunhossen.com" target="_blank"> Al Mamun Hosen</a>`;
-                }
-            </script>
+            <p></p>
         </footer>
     </div>
 
     <script src="app.js"></script>
+    <script src="layout.js"></script>
+    <footer>
+        <p>© <span id="current-year">2024</span> Al Mamun Hossen. All rights reserved. | <a
+                href="http://www.almamunhossen.com" target="_blank" rel="noopener">Visit homepage</a></p>
+    </footer>
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear(); 
+    </script>
 </body>
 
 </html>

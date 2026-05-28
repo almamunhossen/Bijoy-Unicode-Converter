@@ -1,0 +1,76 @@
+%!Adobe-FontList 1.25
+%Locale:0x409
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:GangaSagarMJ
+FamilyName:GangaSagarMJ
+StyleName:Regular
+FullName:GangaSagarMJ
+MenuName:GangaSagarMJ
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\Al Mamun Hossen\New folder\Font\GangaSagarMJ Regular.ttf
+DataFormat:sfntData
+hasSVG:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:66524
+FileModTime:1601614768
+WeightClass:400
+WidthClass:5
+AngleClass:1
+NameArray:0,Mac,18,GangaSagarMJ
+NameArray:0,Mac,4,GangaSagarMJ
+NameArray:0,Win,1,GangaSagarMJ
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:RuposhiBanglaANSIV2
+FamilyName:Ruposhi Bangla ANSI V2
+StyleName:Regular
+FullName:Ruposhi Bangla ANSI V2
+MenuName:Ruposhi Bangla ANSI V2
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\Al Mamun Hossen\New folder\Font\Ruposhi Bangla ANSI V2.ttf
+DataFormat:sfntData
+hasSVG:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:233616
+FileModTime:1668603568
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Win,1,Ruposhi Bangla ANSI V2
+NameArray:0,Win,16,Ruposhi Bangla ANSI V2
+%EndFont
+
+%BeginFont
+Handler:DirectoryHandler
+FontType:TrueType
+FontName:KalpurushANSI
+FamilyName:Kalpurush ANSI
+StyleName:Regular
+FullName:Kalpurush ANSI
+MenuName:Kalpurush ANSI
+StyleBits:0
+WritingScript:Roman
+OutlineFileName:C:\Users\Al Mamun Hossen\New folder\Font\kalpurush ANSI.ttf
+DataFormat:sfntData
+hasSVG:no
+hasCOLR:no
+VariableFontType:NonVariableFont
+FileLength:113300
+FileModTime:1779979611
+WeightClass:400
+WidthClass:5
+AngleClass:0
+NameArray:0,Mac,4,Kalpurush ANSI
+NameArray:0,Win,1,Kalpurush ANSI
+%EndFont
+
