@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     convertToTextArea("CONVERTEDT");
-    setConversionStatus("Unicode converted to Bijoy preview.", "Unicode → Bijoy active");
+    setConversionStatus("Unicode converted to Bijoy preview.", "Unicode →  ANSI / Bijoy active");
   }, 250);
 
   const convertBijoyLive = debounce(() => {
