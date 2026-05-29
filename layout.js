@@ -178,12 +178,51 @@ var UNICODE_EDITOR_NAME = "textarea";
     // ------------------------------
     // Layout switching UI helper (optional)
     // ------------------------------
+    function syncLayoutSelect(layoutValue) {
+        const select = document.getElementById('keyboard-layout');
+        if (select) {
+            select.value = String(layoutValue);
+        }
+        document.body.setAttribute('data-active-layout', String(layoutValue));
+    }
+
     function updateLayoutStatus(state) {
         const names = ['', '', 'Bijoy', 'Somewherein Phonetic', 'Avro Phonetic', 'Unijoy'];
+        const layoutName = names[state.layout] || 'English';
         if(window.updateKeyboardLayoutIndicator) {
-            window.updateKeyboardLayoutIndicator(names[state.layout] || 'English');
+            window.updateKeyboardLayoutIndicator(layoutName);
         }
+        syncLayoutSelect(state.layout);
     }
+
+    window.setKeyboardLayout = function(layoutValue) {
+        const parsedLayout = Number(layoutValue);
+        const normalizedLayout = [1,2,3,4,5].includes(parsedLayout) ? parsedLayout : 2;
+
+        document.querySelectorAll('textarea.bengali-editor').forEach((field) => {
+            const fieldState = editorStates.get(field);
+            if (fieldState) {
+                fieldState.layout = normalizedLayout;
+                updateLayoutStatus(fieldState);
+            }
+        });
+
+        if (document.activeElement && document.activeElement.matches('textarea.bengali-editor')) {
+            const activeState = editorStates.get(document.activeElement);
+            if (activeState) {
+                activeState.layout = normalizedLayout;
+                updateLayoutStatus(activeState);
+            }
+        }
+
+        return normalizedLayout;
+    };
+
+    window.getKeyboardLayout = function() {
+        const select = document.getElementById('keyboard-layout');
+        const value = Number(select ? select.value : 2);
+        return [1,2,3,4,5].includes(value) ? value : 2;
+    };
 
     // ------------------------------
     // Core composition functions (ported & fixed)
@@ -196,7 +235,7 @@ var UNICODE_EDITOR_NAME = "textarea";
     function RefModification(e, state) {
         const field = e.target;
         let backtrack = 1;
-        let result = '';
+        let lastBacktrackedChar = '';
         let consonantStack = '';
         let karFound = '';
         let needHalant = true;
@@ -206,8 +245,9 @@ var UNICODE_EDITOR_NAME = "textarea";
             backtrackStart = field.selectionStart - backtrack;
             selectionEnd = field.selectionEnd;
             scrollTop = field.scrollTop;
-            if(backtrackStart < 0) { result = ''; break; }
+            if(backtrackStart < 0) { break; }
             const ch = field.value[backtrackStart];
+            lastBacktrackedChar = ch;
             if(backtrack !== 1 && IsBanglaKar(ch)) break;
             if(backtrack === 1 && IsBanglaKar(ch)) karFound = ch;
             else if(IsBanglaSoroborno(ch) || IsBanglaDigit(ch) || IsSpace(ch)) break;
@@ -223,8 +263,10 @@ var UNICODE_EDITOR_NAME = "textarea";
             backtrack++;
             if(backtrack > 20) break; // safety
         }
-        if(result === '') return;
-        const replacement = result + 'র্' + consonantStack + karFound;
+
+        if(!lastBacktrackedChar) return;
+
+        const replacement = lastBacktrackedChar + 'র্' + consonantStack + karFound;
         const start = backtrackStart;
         const end = selectionEnd;
         field.value = field.value.slice(0, start) + replacement + field.value.slice(end);
@@ -432,6 +474,24 @@ var UNICODE_EDITOR_NAME = "textarea";
         document.querySelectorAll('textarea.bengali-editor').forEach(ta => {
             if(ta.hasAttribute('data-bengali-handler')) return;
             ta.setAttribute('data-bengali-handler', 'true');
+
+            let state = editorStates.get(ta);
+            if(!state) {
+                state = new BengaliEditorState();
+                editorStates.set(ta, state);
+            }
+            state.layout = window.getKeyboardLayout ? window.getKeyboardLayout() : state.layout;
+            updateLayoutStatus(state);
+
+            ta.addEventListener('focus', () => {
+                let focusedState = editorStates.get(ta);
+                if(!focusedState) {
+                    focusedState = new BengaliEditorState();
+                    editorStates.set(ta, focusedState);
+                }
+                focusedState.layout = window.getKeyboardLayout ? window.getKeyboardLayout() : focusedState.layout;
+                updateLayoutStatus(focusedState);
+            });
             ta.addEventListener('keydown', onKeyDown);
             ta.addEventListener('keypress', onKeyPress);
         });
