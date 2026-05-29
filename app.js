@@ -322,6 +322,7 @@ var bijoy_string_conversion_map = {
   "•N": "ঙ্ঘ",
   "•": "ক্স",
   "”P": "চ্চ",
+  "P¡": "চ্ব",
   "”Q": "চ্ছ",
   "”Q¡": "চ্ছ্ব",
   "”T": "চ্ঞ",
@@ -429,7 +430,6 @@ var bijoy_string_conversion_map = {
   "¯‹": "স্ক",
   "÷": "স্ট",
   ö: "স্খ",
-  "¯—": "স্ত",
   "¯Í": "স্ত",
   "¯‘": "স্তু",
   "¯¿": "স্ত্র",
@@ -532,6 +532,7 @@ var bijoy_string_conversion_map = {
   "†": "ে",
   "¤œ": "ম্ন",
   "‡¤œv": "ম্নো",
+  "”": "চ্",
   V: "ঠ",
 };
 var somewherein_string_conversion_map = {
@@ -899,7 +900,7 @@ var boisakhi_string_conversion_map = {
   "ýU": "স্ট",
   "þU": "স্ট",
   "þÿ": "স্খ",
-  "þæ": "স্ত",
+  "¯Í": "স্ত",
   "þç": "স্তু",
   "þè": "স্ত্র",
   "þí": "স্ন",
@@ -1833,6 +1834,7 @@ var avro_phonetic_keyboard_map = {
   ":": "ঃ",
   "^": "ঁ",
   "`": "্",
+  "”": "চ",
 };
 var unijoy_keyboard_map = {
   0: "০",
@@ -2301,10 +2303,6 @@ function KeyBoardPress(ev) {
 // unicode to bijoy convaeter stat
 var uni2bijoy_string_conversion_map = {
   "।": "|",
-  "‘": "Ô",
-  "’": "Õ",
-  "“": "Ò",
-  "”": "Ó",
   ড়: "o",
   ঢ়: "p",
   "্র্য": "ª¨",
@@ -2340,6 +2338,7 @@ var uni2bijoy_string_conversion_map = {
   চ্ছ: "”Q",
   চ্ছ্ব: "”Q¡",
   চ্ঞ: "”T",
+  চ্ব: "P¡",
   জ্জ্ব: "¾¡",
   জ্জ: "¾",
   জ্ঝ: "À",
@@ -2384,6 +2383,8 @@ var uni2bijoy_string_conversion_map = {
   ন্ড: "Û",
   ন্ত্র: "š¿",
   ন্ত: "š—",
+  ন্ত: "šÍ",
+  স্ত: "¯—",
   স্ত্র: "¯¿",
   ত্র: "Î",
   ন্থ: "š’",
@@ -2879,7 +2880,7 @@ var uni2boisakhi_string_conversion_map = {
   স্ক: "Æ",
   স্খ: "ýL",
   স্ট: "ýU",
-  স্ত: "þæ",
+  স্ত: "¯Í",
   স্তু: "þç",
   স্ন: "þí",
   স্প: "þe",
