@@ -392,7 +392,9 @@ var UNICODE_EDITOR_NAME = "textarea";
         } else if(state.layout === 4 && IsAvroPhoneticModifierCharacter(mappedChar) && !IsSpace(prev)) {
             const mod = GetAvroPhoneticModifiedCharacter(prev, mappedChar, state);
             if(mod !== mappedChar) {
-                if(IsBanglaBanjonborno(prev) && mappedChar === 'হ') RemoveNInsert(field, mod, 1);
+                if(mod === prev) {
+                    Insert(field, mappedChar);
+                } else if(IsBanglaBanjonborno(prev) && mappedChar === 'হ') RemoveNInsert(field, mod, 1);
                 else if(IsBanglaBanjonborno(prev) && IsBanglaBanjonborno(mappedChar)) Insert(field, mod);
                 else if(IsBanglaKar(prev) && IsBanglaSoroborno(mappedChar)) Insert(field, mod);
                 else if(mod === MapSorbornoToKar(mappedChar)) Insert(field, mod);
