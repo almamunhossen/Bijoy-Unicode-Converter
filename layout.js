@@ -277,16 +277,19 @@ var UNICODE_EDITOR_NAME = "textarea";
 
     function OAndOuKarModification(e, state, ch) {
         const field = e.target;
-        const start = field.selectionStart - 1;
+        const start = field.selectionStart;
         const end = field.selectionEnd;
         const scroll = field.scrollTop;
-        let replacement;
-        if(start >= 0 && field.value[start] === 'ে')
-            replacement = (ch === 'ো') ? 'ো' : 'ৌ';
-        else
-            replacement = (ch === 'া') ? 'া' : 'ৗ';
-        field.value = field.value.slice(0, start) + replacement + field.value.slice(end);
-        field.selectionStart = field.selectionEnd = start + replacement.length;
+        let replacement = ch;
+
+        if(start > 0 && field.value[start - 1] === 'ে') {
+            replacement = (ch === 'া') ? 'ো' : 'ৌ';
+            field.value = field.value.slice(0, start - 1) + replacement + field.value.slice(end);
+            field.selectionStart = field.selectionEnd = (start - 1) + replacement.length;
+        } else {
+            field.value = field.value.slice(0, start) + replacement + field.value.slice(end);
+            field.selectionStart = field.selectionEnd = start + replacement.length;
+        }
         field.scrollTop = scroll;
         field.focus();
     }
