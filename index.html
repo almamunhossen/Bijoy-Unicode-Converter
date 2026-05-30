@@ -26,18 +26,6 @@
                 </div>
             </div>
             <div class="header-controls" style="display: flex; align-items: center; gap: 15px;">
-                <select id="keyboard-layout" class="layout-select"
-                    onchange="if(window.setKeyboardLayout) window.setKeyboardLayout(this.value);"
-                    aria-label="Select Keyboard Layout"
-                    style="padding: 5px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--card); color: var(--foreground); font-family: inherit; font-size: 14px; cursor: pointer;">
-                    <option value="1">English</option>
-                    <option value="5">Unijoy</option>
-                    <option value="4">Avro Phonetic</option>
-                    <option value="2" selected>Bijoy</option>
-                    <option value="3">Somewherein Phonetic</option>
-
-
-                </select>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
                     <i class="fas fa-moon"></i>
                     <i class="fas fa-sun"></i>
@@ -50,6 +38,18 @@
                 <div class="summary-chip"><span class="summary-icon">✨</span><span>Instant preview</span></div>
                 <div class="summary-chip"><span class="summary-icon">📋</span><span>One-click copy</span></div>
                 <div class="summary-chip"><span class="summary-icon">🌙</span><span>Theme aware</span></div>
+                <div class="summary-chip"><span class="summary-icon">
+                    <select id="keyboard-layout" class="layout-select"
+                    onchange="if(window.setKeyboardLayout) window.setKeyboardLayout(this.value);"
+                    aria-label="Select Keyboard Layout"
+                    style="padding: 5px 10px; border-radius: 6px; border: 1px solid #331919; background: #331919; color: var(--foreground); font-family: inherit; font-size: 14px; cursor: pointer;">
+                    <option value="1">English</option>
+                    <option value="5">Unijoy</option>
+                    <option value="4">Avro Phonetic</option>
+                    <option value="2" selected>Bijoy</option>
+                    <option value="3">Somewherein Phonetic</option>
+                </select>
+                </div>
             </div>
 
             <div class="converter-status" aria-live="polite">
