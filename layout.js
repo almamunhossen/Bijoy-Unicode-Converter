@@ -126,16 +126,15 @@ var UNICODE_EDITOR_NAME = "textarea";
     // ------------------------------
     // Layout Maps
     // ------------------------------
-    const unijoy_keyboard_map = {
+    const bijoy_keyboard_map = {
         0:"০",1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",
-        a:"ৃ",A:"র্",d:"ি",D:"ী",s:"ু",S:"ূ",f:"া",F:"অ",g:"্",G:"।",
+        a:"ৃ",A:"র্",d:"ি",D:"ী",s:"ু",S:"ূ",f:"া",F:"অ",g:"্",G:"।  ",
         h:"ব",H:"ভ",j:"ক",J:"খ",k:"ত",K:"থ",l:"দ",L:"ধ",z:"্র",Z:"্য",
-        x:"ো",X:"ৌ",c:"ে",C:"ৈ",v:"র",V:"ল",b:"ন",B:"ণ",n:"স",N:"ষ",
+        x:"ো",X:"ৗ",c:"ে",C:"ৈ",v:"র",V:"ল",b:"ন",B:"ণ",n:"স",N:"ষ",
         m:"ম",M:"শ",q:"ঙ",Q:"ং",w:"য",W:"য়",e:"ড",E:"ঢ",r:"প",R:"ফ",
         t:"ট",T:"ঠ",y:"চ",Y:"ছ",u:"জ",U:"ঝ",i:"হ",I:"ঞ",o:"গ",O:"ঘ",
-        p:"ড়",P:"ঢ়","&":"ঁ","$":"৳","`":"‌","~":"‍","^":"÷","*":"×","\\":"ৎ","|":"ঃ"
+        p:"ড়",P:"ঢ়","&":"ঁ","$":"৳","`":"‌","~":"‍","\\":"ৎ","|":"ঃ"
     };
-    
     const bangla_phonetic_keyboard_map = {
         0:"০",1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",
         a:"া",A:"আ",d:"ড",D:"দ",s:"স",S:"ষ",f:"ফ",F:"ঋ",g:"গ",G:"ঘ",
@@ -153,23 +152,23 @@ var UNICODE_EDITOR_NAME = "textarea";
         n:"ন",N:"ণ",m:"ম",y:"য়",w:"্ব",r:"র",R:"ড়",t:"ত",T:"ট",p:"প",
         $:"৳","+":"্",".":"।",":":"ঃ","^":"ঁ","`":"্"
     };
-
-    const bijoy_keyboard_map = {
+    const unijoy_keyboard_map = {
         0:"০",1:"১",2:"২",3:"৩",4:"৪",5:"৫",6:"৬",7:"৭",8:"৮",9:"৯",
-        a:"ৃ",A:"র্",d:"ি",D:"ী",s:"ু",S:"ূ",f:"া",F:"অ",g:"্",G:"।  ",
+        a:"ৃ",A:"র্",d:"ি",D:"ী",s:"ু",S:"ূ",f:"া",F:"অ",g:"্",G:"।",
         h:"ব",H:"ভ",j:"ক",J:"খ",k:"ত",K:"থ",l:"দ",L:"ধ",z:"্র",Z:"্য",
-        x:"ো",X:"ৗ",c:"ে",C:"ৈ",v:"র",V:"ল",b:"ন",B:"ণ",n:"স",N:"ষ",
+        x:"ো",X:"ৌ",c:"ে",C:"ৈ",v:"র",V:"ল",b:"ন",B:"ণ",n:"স",N:"ষ",
         m:"ম",M:"শ",q:"ঙ",Q:"ং",w:"য",W:"য়",e:"ড",E:"ঢ",r:"প",R:"ফ",
         t:"ট",T:"ঠ",y:"চ",Y:"ছ",u:"জ",U:"ঝ",i:"হ",I:"ঞ",o:"গ",O:"ঘ",
-        p:"ড়",P:"ঢ়","&":"ঁ","$":"৳","`":"‌","~":"‍","\\":"ৎ","|":"ঃ"
+        p:"ড়",P:"ঢ়","&":"ঁ","$":"৳","`":"‌","~":"‍","^":"÷","*":"×","\\":"ৎ","|":"ঃ"
     };
+
     function mapUnicodeCharacter(layout, latinChar) {
         let map;
         switch(layout) {
-            case 2: map = unijoy_keyboard_map; break;
+            case 2: map = bijoy_keyboard_map; break;
             case 3: map = bangla_phonetic_keyboard_map; break;
             case 4: map = avro_phonetic_keyboard_map; break;
-            case 5: map = bijoy_keyboard_map; break;
+            case 5: map = unijoy_keyboard_map; break;
             default: return latinChar;
         }
         return map[latinChar] !== undefined ? map[latinChar] : latinChar;
@@ -340,8 +339,8 @@ var UNICODE_EDITOR_NAME = "textarea";
         }
         if(IsBanglaBanjonborno(prev) && IsBanglaSoroborno(ch))
             return MapSorbornoToKar(ch);
-        // if(IsBanglaBanjonborno(prev) && IsBanglaBanjonborno(ch) && !state.avroAPressFlag)
-        //     return '্' + ch;
+        if(IsBanglaBanjonborno(prev) && IsBanglaBanjonborno(ch) && !state.avroAPressFlag)
+            return '্' + ch;
         const key = prev + ch;
         if(pairs[key]) return pairs[key];
         if(ch !== 'অ' && ch !== '্') state.avroAPressFlag = false;
