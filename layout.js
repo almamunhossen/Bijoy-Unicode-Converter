@@ -616,5 +616,8 @@ var UNICODE_EDITOR_NAME = "textarea";
     } else {
         attachToTextareas();
     }
+
+
+    
 })();
 
